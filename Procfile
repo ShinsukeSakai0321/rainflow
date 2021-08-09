@@ -1,1 +1,1 @@
-web: gunicorn rainflow.rainflow:rainflow --log-file -
+web: gunicorn app:rainflow --log-file -
