@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<center><h1>レインフロー法による波形計数</h1></center>
+<div class="margin">
+  <h2>概要</h2>
+  <p>
+      時刻歴データからピーク値計算後、レインフロー計数を行う機能を提供する。原理の詳細は文献[1]を参照のこと。計算結果については、ユーザの責任のもとに利用して下さい。<br>
+      [1]岡村弘之，板垣　浩著「強度の統計的取り扱い」，培風館， 4.3疲労の安全寿命
+  </p>
+  <h2>利用法</h2>
+  <p>最下部の<b>計算実行</b>のセクションで、波形計数処理を行う手順を以下に示す。まずは、次の<b>サンプルデータ</b>セクションでの動作確認をしてから利用して下さい。</p>
+  <ol>
+      <li>[ファイルの選択]ボタンを押し、時刻歴データのcsvファイルを選択する。</li>
+      <li>[送信]ボタンを押すことによりデータが転送され、レインフロー計数が行なわれる。</li>
+      <li>計算終了後にメッセージとともに、二つのボタンが出てくる。[半波+平均]ボタンにより、results.csvがダウンロードされる。[ピーク値]ボタンによりpeak.csvがダウンロードされる。results.csvには、評価された半波とその平均値のデータ群が、peak.csvには、評価されたピーク値列が出力される。</li>
+  </ol>
+  <h2>サンプルデータ</h2>
+  <p>下記の[サンプルデータ]ボタンをクリックするとサンプルデータwave.csvがダウンロードされます。これを用いて解析した結果がresults.csv,peak.csvと一致することを確認して下さい。</p>
+  <form method="post" action="{{ url_for('sample') }}" enctype="multipart/form-data">
+    <input type="submit" value="サンプルデータ" name="action">
+  </form>
+  <table border=1>
+    <tbody>
+      <tr>
+        <td>results.csv</td>
+        <td>peak.csv</td>
+      </tr>
+      <tr>
+        <td><img src="../outputs/results.jpg" width="170"></td>
+        <td><img src="../outputs/peak.jpg" width="110"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>計算実行</h2>
+<form method="post" action="{{ url_for('show_csv') }}" enctype="multipart/form-data">
+  <input type="file" id="send_data" name="send_data">
+  <input type="submit" value="送信">
+</form>
+<div>
+  {% if result %}
+  <dl>
+    <dt>{{ result }}<dt>
+      <form action="{{ url_for('results') }}" method="post">
+        <input type="submit" value="半波+平均" name="action">
+        <input type="submit" value="ピーク値" name="action">
+      </form>
+      </dl>
+  {% endif %}
+</div>
+</div>
+{% endblock %}
