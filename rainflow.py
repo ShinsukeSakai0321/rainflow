@@ -44,17 +44,24 @@ def show_csv():
                 ii+=1
                 if ii!=1:
                     wave.append(float(co[0][0]))            
-
+            
             hl=hloop.HL()
-            hl.SetWave(wave)
-            hl.Calc()
-            halfR,halfM=hl.GetRes()
-            peak=hl.GetPeak()
+            name = request.form.get('radio')
+            print(name)
+            if name=='Wave':
+                hl.SetWave(wave)
+                hl.Calc()
+                halfR,halfM=hl.GetRes()
+                peak=hl.GetPeak()
+            else:
+                hl.SetPeak(wave)
+                halfR,halfM=hl.hloop()
             dd=pd.DataFrame({'halfR':halfR,'halfM':halfM})
-            dd.to_csv('results/results.csv')
-            dpeak=pd.DataFrame({'peak':peak})
-            dpeak.to_csv('results/peak.csv')
-            return render_template('csv.html', result='計算が終了しました。結果をダウンロードして下さい。')
+            dd.to_csv('results/results.csv',index=False)
+            if name=='peak':
+                dpeak=pd.DataFrame({'peak':peak})
+                dpeak.to_csv('results/peak.csv',index=False)
+            return render_template('csv.html', result='計算が終了しました。結果をダウンロードして下さい。',name=name)
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -87,8 +94,8 @@ def sample():
         path = os.path.abspath(__file__)[:-7]
         if request.form['action']=='サンプルデータ':
             return send_from_directory(
-                app.config['RESULTS_FOLDER'],
-                'wave.csv',
+                directory=app.config['RESULTS_FOLDER'],
+                path='wave.csv',
                 as_attachment=True,
                 attachment_filename='wave.csv',
             )
