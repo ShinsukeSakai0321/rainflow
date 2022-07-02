@@ -99,7 +99,13 @@ def sample():
                 as_attachment=True,
                 attachment_filename='wave.csv',
             )
-
+        if request.form['action']=='ASTMデータ':
+            return send_from_directory(
+                directory=app.config['RESULTS_FOLDER'],
+                path='ASTM.csv',
+                as_attachment=True,
+                attachment_filename='ASTM.csv',
+            )
 
 if __name__ == '__main__':
     app.debug = True

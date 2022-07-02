@@ -17,6 +17,7 @@
       <li>計算終了後にメッセージとともに、新たなボタンが出てくる。[半波+平均]ボタンにより、results.csvがダウンロードされる。入力ファイルが時刻歴データの場合には、[ピーク値]ボタンも出現し、ボタンを押すことによりpeak.csvがダウンロードされる。results.csvには、評価された半波とその平均値のデータ群が、peak.csvには、評価されたピーク値列が出力される。</li>
   </ol>
   <h2>サンプルデータ</h2>
+  <h3>例題1</h3>
   <p>下記の時刻歴の[サンプルデータ]ボタンをクリックするとサンプルデータwave.csvがダウンロードされます。これを用いて解析した結果がresults.csv,peak.csvと一致することを確認して下さい。</p>
   <form method="post" action="{{ url_for('sample') }}" enctype="multipart/form-data">
     <input type="submit" value="サンプルデータ" name="action">
@@ -33,6 +34,53 @@
       </tr>
     </tbody>
   </table>
+
+  <h3>例題2</h3>
+  <p>ASTM E1049-85(2017) Rainflow Counting Example掲載されているデータを用いて検証できます。下記ボタンにより、サンプルデータASTM.csvをダウンロードして実行して下さい。出力のresults.csvの内容が下記と一致していることを確認して下さい。</p>
+  <form method="post" action="{{ url_for('sample') }}" enctype="multipart/form-data">
+    <input type="submit" value="ASTMデータ" name="action">
+  </form>
+  <table border=1>
+    <tbody>
+      <tr>
+        <td>halfR</td>
+        <td>halfM</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>-0.5</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>-1</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>0.5</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+  
   <h2>計算実行</h2>
   <p>入力ファイルの内容を選択して下さい</p>
 
