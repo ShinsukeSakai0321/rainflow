@@ -36,10 +36,12 @@
   </table>
 
   <h3>例題2</h3>
-  <p>ASTM E1049-85(2017) Rainflow Counting Example掲載されているデータを用いて検証できます。下記ボタンにより、サンプルデータASTM.csvをダウンロードして実行して下さい。出力のresults.csvの内容が下記と一致していることを確認して下さい。</p>
+  <p>ASTM E1049-85(2017) Rainflow Counting Example掲載されているPeakデータを用いて検証できます。下記ボタンにより、サンプルデータASTM.csvをダウンロードして実行して下さい。出力のresults.csvの内容が下記と一致していることを確認して下さい。</p>
+ 
   <form method="post" action="{{ url_for('sample') }}" enctype="multipart/form-data">
     <input type="submit" value="ASTMデータ" name="action">
   </form>
+  <p>results.csvの内容</p>
   <table border=1>
     <tbody>
       <tr>
